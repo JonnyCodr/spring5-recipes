@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.converters.RecipeCommandToRecipe;
+import com.example.demo.converters.RecipeToRecipeCommand;
 import com.example.demo.models.Recipe;
 import com.example.demo.repositories.RecipeRepository;
 import org.junit.Before;
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.*;
 public class RecipeServiceImplTest {
 
     RecipeService recipeService;
+    RecipeCommandToRecipe recipeCommandToRecipe;
+    RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
     RecipeRepository recipeRepository;
@@ -27,7 +31,7 @@ public class RecipeServiceImplTest {
         //init mocks
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test

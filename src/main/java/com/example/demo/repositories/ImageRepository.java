@@ -1,4 +1,5 @@
 package com.example.demo.repositories;
 
-public interface Imagepository {
+
+public interface ImageRepository {
 }

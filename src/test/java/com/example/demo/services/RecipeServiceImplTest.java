@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.converters.RecipeCommandToRecipe;
 import com.example.demo.converters.RecipeToRecipeCommand;
+import com.example.demo.ecxeptions.NotFoundException;
 import com.example.demo.models.Recipe;
 import com.example.demo.repositories.RecipeRepository;
 import org.junit.Before;
@@ -32,6 +33,16 @@ public class RecipeServiceImplTest {
         MockitoAnnotations.initMocks(this);
 
         recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdNotFoundTest() throws Exception {
+
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(1L);
     }
 
     @Test

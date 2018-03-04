@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.commands.RecipeCommand;
+import com.example.demo.controllers.exceptionHandling.ControllerExceptionHandler;
 import com.example.demo.ecxeptions.NotFoundException;
 import com.example.demo.models.Recipe;
 import com.example.demo.services.RecipeService;
@@ -35,7 +36,9 @@ public class RecipeControllerTest {
         MockitoAnnotations.initMocks(this);
 
         controller = new RecipeController(recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
